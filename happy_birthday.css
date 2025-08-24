@@ -1,0 +1,130 @@
+body {
+    background-color: rgb(251, 200, 210);
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.wrapper {
+    position: fixed;
+    z-index: 20;
+    margin: 0 auto;
+    max-width: 300px;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    animation: bubble-animation linear 20s infinite;
+    width: 20px;
+    height: 20px;
+    box-shadow: 0 0 8px #fff;
+}
+
+@keyframes bubble-animation {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-120vh);
+        /* bay lên trên hết màn hình */
+        opacity: 0;
+    }
+}
+
+.birthday-text {
+    font-size: clamp(24px, 6vw, 60px);
+    font-family: 'Pacifico', cursive;
+    animation: glow 2s infinite alternate;
+    white-space: pre;
+    color: white;
+
+}
+
+.birthday-sub {
+    font-size: clamp(8px, 4vw, 14px);
+    color: #000000;
+    margin-top: 30px;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px #ff99cc;
+    }
+
+    to {
+        text-shadow: 0 0 30px #ff66b2, 0 0 50px #ff7abd;
+    }
+}
+
+#birthdayMessage {
+    display: none;
+    text-align: center;
+    margin-top: 20vh;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+#birthdayMessage.show {
+    display: block;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.bottom-img {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    width: 25vw;
+    /* chiếm 25% chiều rộng màn hình */
+    max-width: 300px;
+    /* không vượt quá 300px */
+    min-width: 120px;
+    /* không nhỏ hơn 120px */
+    height: auto;
+    z-index: 10;
+    background: transparent;
+}
+
+/* Nếu màn hình rất nhỏ (điện thoại) */
+@media (max-width: 480px) {
+    .bottom-img {
+        width: 40vw;
+        /* chiếm 40% màn hình trên mobile */
+    }
+}
+
+.vanish {
+    animation: vanish 1s forwards;
+}
+
+@keyframes vanish {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+

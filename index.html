@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMz4">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="happy_birthday.css">
+    <link rel="stylesheet" href="mailButton.css">
+
+</head>
+
+<body>
+    <script>
+        function createBubble () {
+            const bubble = document.createElement ('div');
+            bubble.className = "bubble";
+            // Random position 
+            bubble.style.left = Math.random() * window.innerWidth + 'px';
+            bubble.style.top = Math.random() * window.innerHeight + 'px';
+            // Random size
+            const size = Math.random() * 10 + 3; // Size between 10px and 30px
+            bubble.style.width = size + 'px';
+            bubble.style.height = size + 'px';
+            // Random animation duration
+            const duration = Math.random() * 5 + 5; // Duration between 5s and 10s
+            bubble.style.animationDuration = duration + 's';
+            // Random delay
+            const delay = Math.random() * 5; // Delay between 0s and 5s
+            bubble.style.animationDelay = delay + 's';
+            // Random opacity
+            const opacity = Math.random() * 0.5 + 0.5; // Opacity between 0.5 and 1
+            bubble.style.opacity = opacity;
+            // Append to body
+            document.body.appendChild(bubble);
+        }
+
+        // Tao 70 bong bong 
+        for (let i = 0; i<70; i++) {
+            createBubble ();
+        }
+    </script>
+
+    <img src="Untitled-1.png" class="bottom-img">
+
+    
+    <div class="wrapper" id="loginBox">
+        <form id="loginForm"> <!-- Thêm id="loginForm" -->
+            <h1> LOGIN </h1>
+            <div class="input-box">
+                <input id="username" type="text" placeholder="Nhập họ và tên nha" required>
+            </div>
+            <div class="input-box mt-2">
+                <input id="password" type="password" placeholder="Mật khẩu là ngày tháng năm sinh của bạn " required>
+            </div>
+            <div class="input-box mt-3">
+                <button type="submit" class="btn btn-primary" style="background-color: #ffc0c0; border: none;">
+                    Đăng nhập
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Happy Birthday -->
+    <div id="birthdayMessage">
+        <h1 class="birthday-text"> 🎉 Happy Birthday 🎂 </h1>
+        <p class="birthday-sub" id="birthdayText">
+            Nhấn vào lá thư đi 💖
+        </p>
+    </div>
+    <!-- Mail Animation -->
+    <div class="letter-image" style = "display:none" id="mailAnimation">
+        <div class="animated-mail">
+            <div class="back-fold"></div>
+            <div class="letter">
+                <div class="letter-border"></div>
+                <div class="letter-title"></div>
+                <div class="letter-context"></div>
+                <div class="letter-stamp">
+                    <div class="letter-stamp-inner"></div>
+                </div>
+            </div>
+            <div class="top-fold"></div>
+            <div class="body"></div>
+            <div class="left-fold"></div>
+        </div>
+        <div class="shadow"></div>
+    
+        <!-- Mail -->
+    <div id = "Mailbox" class = "frame" ></div>
+        <div class = "border-top"></div>
+        <div class = "border-bottom"></div>
+        <span id="text"> </span>
+    </div>
+
+    <!-- Tiếp theo -->
+    <div id = "Next" style="display: none;">
+        <button class="" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; background-color: #ff66b2;" onclick="window.location.href='nextpage.html'">
+            Ấn vào đây đi 
+        </button>
+    </div>
+
+    <audio id="audio" src="happy-birthday-334876.mp3" loop="true">
+    </audio>
+
+    
+
+    <script>
+        // Xử lý đăng nhập 
+            document.getElementById('loginForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value;
+
+                if (username === 'Thái Thị Kim Thương' && password === '25082004') {
+                    // Ẩn hộp đăng nhập
+                    document.getElementById('loginBox').style.display = 'none';
+
+                    // >>> Bắt đầu phát nhạc
+                    const music = document.getElementById("audio");
+                    music.play().catch(error => {
+                        console.log("Trình duyệt chặn autoplay, cần click nút để phát nhạc");
+                    });
+
+                    // Hiện Happy Birthday
+                    const msg = document.getElementById('birthdayMessage');
+                    msg.classList.add("show");
+
+                    // Hiện MailAnimation
+                    document.getElementById('mailAnimation').style.display = 'block';
+
+                    // Nếu người dùng click vào mailAnimation thì dòng thư sẽ mở ra.
+                    document.getElementById('mailAnimation').addEventListener('click', function() {
+                        this.classList.add('open');
+                        // Hiện lá thư
+                        const text = "Chúc mừng Sinh nhật Thái Thương nha. Tuổi mới thành công và rực rỡ, mọi mong ước đều trở thành hiện thực. Mong Thái Thương theo đuổi được người Thái Thương thích (hmmm... Trà chỉ mong thôi vì trong câu chuyện này Thái Thương là người hiểu rõ nhất mà). Hành trình phía trước nà Thái Thương chọn sẽ có nhiều những khó khăn và thử thách, mong Thái Thương đủ vững vàng để vượt qua tất cả. Chúc Thái Thương tất cả những điều tốt đẹp nhất. ";
+
+                        const birthdayText = document.getElementById("birthdayText");
+                        birthdayText.innerHTML = "";
+
+                        let i = 0;
+                        function typeEffect() {
+                            if (i < text.length) {
+                                birthdayText.innerHTML += text.charAt(i);
+                                i++;
+                                setTimeout(typeEffect, 50); // tốc độ gõ (ms)
+                            }
+                        }
+                        typeEffect();
+                        //document.getElementById('mailAnimation').classList.add("vanish");
+                        document.getElementById('mailAnimation').style.display = 'none';
+                    });
+                } else {
+                    alert('❌ Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng thử lại.');
+                }
+            });
+    </script>
+</body>
+</html>
